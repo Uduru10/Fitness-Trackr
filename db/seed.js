@@ -41,3 +41,18 @@ const createTables = async () => {
         UNIQUE(routine_id, activity_id)
     )`);
 };
+
+const rebuildDb = async () => {
+  client.connect();
+  try {
+    await dropTables();
+    await createTables();
+    await seedDb();
+  } catch (error) {
+    console.error(error);
+  } finally {
+    client.end();
+  }
+};
+
+rebuildDb();
