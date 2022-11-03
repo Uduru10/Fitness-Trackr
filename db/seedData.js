@@ -59,6 +59,14 @@ const routines = [
     name: "lower body",
     goal: "bigger legs",
   },
+
+  {
+    id: 7,
+    creator_id: 3,
+    is_public: true,
+    name: "test1",
+    goal: "test1",
+  },
 ];
 
 const activities = [

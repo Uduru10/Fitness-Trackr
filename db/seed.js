@@ -11,6 +11,11 @@ const {
   getRoutineById,
   getRoutinesWithoutActivities,
   getAllPublicRoutines,
+  getAllPublicRoutinesByUser,
+  getAllRoutinesByUser,
+  getPublicRoutinesByActivity,
+  updateRoutine,
+  destroyRoutine,
 } = require("./adapters/routines");
 const { createActivity } = require("./adapters/activities");
 const { createRoutineActivities } = require("./adapters/routine_activities");
@@ -103,6 +108,29 @@ const seedDb = async () => {
   console.log("Calling getAllPublicRoutines");
   const publicRoutines = await getAllPublicRoutines();
   console.log("Public Routines:", publicRoutines);
+
+  console.log("Calling getAllPublicRoutinesByUser");
+  const publicUsers = await getAllPublicRoutinesByUser("Bada");
+  console.log("Public routines by user:", publicUsers);
+
+  console.log("Calling getAllRoutinesByUser");
+  const routineByUser = await getAllRoutinesByUser("Bada");
+  console.log("Routines by user:", routineByUser);
+
+  console.log("Calling getPublicRoutinesByActivity");
+  const publicRoutineActivity = await getPublicRoutinesByActivity(3);
+  console.log("getting public routines by activity:", publicRoutineActivity);
+
+  console.log("Calling updateRoutine");
+  const updateRoutineResult = await updateRoutine(routines[0].id, {
+    name: "updated name",
+    goal: "updated goal",
+  });
+  console.log("updated routine", updateRoutineResult);
+
+  console.log("Calling destroy Routine");
+  const destroyRoutineResult = await destroyRoutine(7);
+  console.log("destroyed routine", destroyRoutineResult);
 };
 
 const rebuildDb = async () => {
@@ -111,8 +139,6 @@ const rebuildDb = async () => {
     await dropTables();
     await createTables();
     await seedDb();
-    const routines = await getAllRoutines();
-    console.log("List of routines: ", routines);
   } catch (error) {
     console.error(error);
   } finally {
