@@ -91,7 +91,7 @@ const seedDb = async () => {
   for (const activity of activities) {
     await createActivity(activity);
   }
-  console.log("...sedding routine_activities");
+  console.log("...seeding routine_activities");
   for (const routine_activity of routine_activities) {
     await createRoutineActivities(routine_activity);
   }
