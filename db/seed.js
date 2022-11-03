@@ -17,7 +17,7 @@ const {
   updateRoutine,
   destroyRoutine,
 } = require("./adapters/routines");
-const { createActivity } = require("./adapters/activities");
+const { createActivity, getAllActivities } = require("./adapters/activities");
 const { createRoutineActivities } = require("./adapters/routine_activities");
 const {
   users,
