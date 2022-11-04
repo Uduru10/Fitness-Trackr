@@ -4,7 +4,7 @@ const {
   getUser,
   getUserById,
   getUserByUsername,
-} = require("./adapters/models/users");
+} = require("./adapters/users");
 const {
   createRoutine,
   getAllRoutines,
@@ -16,20 +16,20 @@ const {
   getPublicRoutinesByActivity,
   updateRoutine,
   destroyRoutine,
-} = require("./adapters/models/routines");
+} = require("./adapters/routines");
 const {
   createActivity,
   getAllActivities,
   getActivityById,
   updateActivity,
-} = require("./adapters/models/activities");
+} = require("./adapters/activities");
 const {
   addActivityToRoutine,
   getRoutineActivityById,
   updateRoutineActivity,
   destroyRoutineActivity,
   getRoutineActivitiesByRoutine,
-} = require("./adapters/models/routine_activities");
+} = require("./adapters/routine_activities");
 const {
   users,
   routines,

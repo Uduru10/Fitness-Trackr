@@ -1,5 +1,5 @@
-const client = require("../../client");
-const { routines } = require("../../seedData");
+const client = require("../client");
+const { routines } = require("../seedData");
 
 async function createRoutine(routine) {
   const { creator_id, is_public, name, goal } = routine;
