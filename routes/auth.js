@@ -1,21 +1,24 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const authRouter = require("express").Router();
-const { User } = require("../db/adapters/models");
-const { JWT_SECRET } = process.env;
+const { User } = require("../db/adapters");
 const { authRequired } = require("./utils");
 const SALT_ROUNDS = 10;
 
+// POST /api/auth/register
 authRouter.post("/register", async (req, res, next) => {
   try {
     const { username, password } = req.body;
-
+    // Call getUserByUsername, and pass it the username from the body above
+    // if that returns a user, then you need to send an error message back
+    // saying that user already exists, if there isn't a user
+    // you can move on to the rest of the logic
     const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
     const user = await User.createUser({ username, password: hashedPassword });
 
     delete user.password;
 
-    const token = jwt.sign(user, JWT_SECRET);
+    const token = jwt.sign(user, process.env.JWT_SECRET);
 
     res.cookie("token", token, {
       sameSite: "strict",
