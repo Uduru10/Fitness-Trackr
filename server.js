@@ -1,7 +1,11 @@
 require("dotenv").config();
+
 const express = require("express");
 const morgan = require("morgan");
-const path = require("path");
+const cookieParser = require("cookie-parser");
+const { COOKIE_SECRET } = process.env;
+
+const { authRequired } = require("./routes/utils");
 const { client } = require("./db");
 
 const app = express();
@@ -12,16 +16,13 @@ client.connect();
 //Middleware
 
 app.use(morgan("dev"));
+app.use(cookieParser(COOKIE_SECRET));
 app.use(express.json());
 
-app.use((req, res, next) => {
-  console.log("bodyloggerstart");
-  console.log(req.body);
-  console.log("bodyloggerend");
-  next();
-});
-
 //router
+app.get("/test", authRequired, (req, res, next) => {
+  res.send("You are authorized");
+});
 
 //error handler
 
