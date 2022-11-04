@@ -1,5 +1,5 @@
-const client = require("../client");
-const { routines } = require("../seedData");
+const client = require("../../client");
+const { routines } = require("../../seedData");
 
 async function createRoutine(routine) {
   const { creator_id, is_public, name, goal } = routine;
@@ -294,12 +294,6 @@ async function updateRoutine(routine_id, fields = {}) {
 }
 
 async function destroyRoutine(routine_id) {
-  // const setString = Object.keys
-  //   .map((key, index) => `"${key}"= $${index + 1}`)
-  //   .join(",");
-  // if (setString.length === 0) {
-  //   return;
-  // }
   try {
     await client.query(
       ` DELETE FROM routine_activities 

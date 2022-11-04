@@ -4,7 +4,7 @@ const {
   getUser,
   getUserById,
   getUserByUsername,
-} = require("./adapters/users");
+} = require("./adapters/models/users");
 const {
   createRoutine,
   getAllRoutines,
@@ -16,9 +16,20 @@ const {
   getPublicRoutinesByActivity,
   updateRoutine,
   destroyRoutine,
-} = require("./adapters/routines");
-const { createActivity, getAllActivities } = require("./adapters/activities");
-const { createRoutineActivities } = require("./adapters/routine_activities");
+} = require("./adapters/models/routines");
+const {
+  createActivity,
+  getAllActivities,
+  getActivityById,
+  updateActivity,
+} = require("./adapters/models/activities");
+const {
+  addActivityToRoutine,
+  getRoutineActivityById,
+  updateRoutineActivity,
+  destroyRoutineActivity,
+  getRoutineActivitiesByRoutine,
+} = require("./adapters/models/routine_activities");
 const {
   users,
   routines,
@@ -98,7 +109,7 @@ const seedDb = async () => {
   }
   console.log("...seeding routine_activities");
   for (const routine_activity of routine_activities) {
-    await createRoutineActivities(routine_activity);
+    await addActivityToRoutine(routine_activity);
   }
 
   console.log("Calling getRoutineById");
@@ -131,6 +142,39 @@ const seedDb = async () => {
   console.log("Calling destroy Routine");
   const destroyRoutineResult = await destroyRoutine(7);
   console.log("destroyed routine", destroyRoutineResult);
+
+  console.log("Calling getActivityById");
+  const cores = await getActivityById(1);
+  console.log("The activity by Id is:", cores);
+
+  console.log("Calling updateActivity");
+  const updateActivityResult = await updateActivity(activities[0].id, {
+    name: "updated name",
+    description: "updated description",
+  });
+  console.log("updated activity", updateActivityResult);
+
+  console.log("Calling getRoutineActivityById");
+  const getRAResult = await getRoutineActivityById(1);
+  console.log("The routine_activity by Id is:", getRAResult);
+
+  console.log("Calling updateRoutineActivity");
+  const updateRoutineActivityResult = await updateRoutineActivity(
+    routine_activities[0].id,
+    {
+      count: 111,
+      duration: 111,
+    }
+  );
+  console.log("updated routine_activity", updateRoutineActivityResult);
+
+  console.log("Calling destroy Routine_Activity");
+  const destroyRAResult = await destroyRoutineActivity(5);
+  console.log("destroyed routine_activity", destroyRAResult);
+
+  console.log("Calling get UserByUsername");
+  const gettingUserByUsername = await getUserByUsername("Ugo");
+  console.log("Got the user by username:", gettingUserByUsername);
 };
 
 const rebuildDb = async () => {

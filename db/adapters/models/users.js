@@ -1,6 +1,7 @@
-const client = require("../client");
+const client = require("../../client");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+
 async function createUser(user) {
   const { username, password } = user;
   try {
@@ -32,7 +33,8 @@ async function getUserById(id) {
       rows: [user],
     } = await client.query(
       `
-      SELECT * FROM users
+      SELECT id, users.username
+       FROM users
       WHERE id=${id}
       `
     );
@@ -48,8 +50,16 @@ async function getUserByUsername(username) {
   try {
     const {
       rows: [user],
-    } = await client.query();
-  } catch (error) {}
+    } = await client.query(
+      `SELECT *
+       FROM users
+       WHERE users.username=$1`,
+      [username]
+    );
+    return user;
+  } catch (error) {
+    throw error;
+  }
 }
 module.exports = {
   client,
