@@ -34,7 +34,7 @@ raRouter.patch("/:routineActivityId", authRequired, async (req, res, next) => {
   }
 
   try {
-    const originalRoutine = await Routine.getRoutineById(routineId);
+    const originalRoutine = await Routine.getRoutineById(routineActivityId);
     if (originalRoutine.creator_id === req.user.id) {
       const updatedRA = await RA.updateRoutineActivity(
         routineActivityId,
