@@ -1,5 +1,3 @@
-import { application, response } from "express";
-
 export async function fetchUsers() {
   const response = await fetch("/api/users");
   const result = await response.json();
@@ -13,10 +11,8 @@ export async function registerUser(username, password) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      users: {
-        username,
-        password,
-      },
+      username,
+      password,
     }),
   });
   const result = await response.json();
@@ -30,23 +26,31 @@ export async function loginUser(username, password) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      users: {
-        username,
-        password,
-      },
+      username,
+      password,
     }),
   });
   const result = await response.json();
   return result;
 }
 
-export async function fetchMe(token) {
+export async function logoutUser(username, password) {
+  const response = await fetch("/api/users/logout", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  const result = await response.json();
+  return result;
+}
+
+export async function fetchMe() {
   const response = await fetch("/api/users/me", {
     headers: {
       "Content-Type": "application.json",
-      Authorization: `Bearer ${token}`,
     },
   });
+  const result = await response.json();
+  return result;
 }
-const result = await response.json();
-return result;

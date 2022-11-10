@@ -5,7 +5,7 @@ const { Routine } = require("../db/adapters/index");
 routinesRouter.get("/", async (req, res, next) => {
   try {
     const allPublicRoutines = await Routine.getAllPublicRoutines();
-    res.send({ allPublicRoutines });
+    res.send(allPublicRoutines);
   } catch (error) {
     next(error);
   }

@@ -1,18 +1,16 @@
 import "./App.css";
-import useRoutines from "./hooks/useRoutines";
-import useActivies from "./hooks/useActivities";
-import Navigation from "./components/navigation";
+import Routines from "./components/Routines";
+import User from "./components/User";
+import Navigation from "./components/Navigation";
 import { Routes, Route } from "react-router-dom";
 
 function App() {
-  const { routines } = useRoutines();
-  const { activities } = useActivies;
-
   return (
     <div className="App">
       <Navigation />
       <Routes>
-        <Route path="/" />
+        <Route path="/" element={<Routines />} />
+        <Route path="/:method" element={<User />} />
       </Routes>
     </div>
   );
