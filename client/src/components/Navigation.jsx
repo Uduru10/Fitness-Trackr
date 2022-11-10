@@ -8,10 +8,11 @@ function Navigation() {
   console.log("users:", users);
   return (
     <nav className="Navbar">
-      <span>{users.username}</span>
-      <Link to="/"> Fitness Tracker</Link>
-      <Link to="/Activities"> Activities</Link>
+      <span>Fitness Tracker</span>
+      <span>Welcome, {users.username}</span>
+
       <Link to="/"> Routines</Link>
+      <Link to="/activities"> Activities</Link>
       {!loggedIn ? (
         <>
           <Link to="/login"> LogIn</Link>
@@ -32,9 +33,9 @@ function Navigation() {
             Log Out
           </Link>
 
-          <Link to="/CreateRoutine">Create A Routine</Link>
+          <Link to="/createRoutine">Create A Routine</Link>
 
-          <Link to="/Profile">Profile</Link>
+          <Link to="/profile">Profile</Link>
         </>
       ) : null}
     </nav>

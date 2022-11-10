@@ -11,6 +11,16 @@ routinesRouter.get("/", async (req, res, next) => {
   }
 });
 
+routinesRouter.get("/:routineId", async (req, res, next) => {
+  const { routineId } = req.params;
+  try {
+    const singleRoutine = await Routine.getRoutineById(routineId);
+    res.send(singleRoutine);
+  } catch (error) {
+    next(error);
+  }
+});
+
 routinesRouter.post("/", authRequired, async (req, res, next) => {
   const { is_public, name, goal } = req.body;
   try {
