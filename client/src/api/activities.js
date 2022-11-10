@@ -11,7 +11,8 @@ export async function createActivity(name, description) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      activities: { name, description },
+      name,
+      description,
     }),
   });
   const result = await response.json();

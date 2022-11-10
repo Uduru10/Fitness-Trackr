@@ -6,7 +6,7 @@ const { authRequired } = require("./utils");
 activitiesRouter.get("/", async (req, res, next) => {
   try {
     const allActivities = await Activity.getAllActivities();
-    res.send({ allActivities });
+    res.send(allActivities);
   } catch (error) {
     next(error);
   }
@@ -66,7 +66,7 @@ activitiesRouter.get("/:activityId/routines", async (req, res, next) => {
     const routinesByActivity = await Routine.getPublicRoutinesByActivity(
       activityId
     );
-    res.send({ routinesByActivity });
+    res.send(routinesByActivity);
   } catch (error) {
     next(error);
   }
