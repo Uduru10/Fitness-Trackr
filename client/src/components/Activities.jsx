@@ -19,8 +19,8 @@ function Activities() {
       {activities.map((activity) => {
         return (
           <div key={activity.id}>
-            <h3>{activity.name} </h3>
-            <h4>{activity.description}</h4>
+            <h3> Activity: {activity.name} </h3>
+            <h4> Description: {activity.description}</h4>
           </div>
         );
       })}

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { registerUser, loginUser } from "../api/users";
 import { useNavigate, useParams } from "react-router";
 import useUsers from "../hooks/useUsers";
+import Button from "react-bootstrap/Button";
 
 export default function User() {
   const { method } = useParams();
@@ -47,9 +48,9 @@ export default function User() {
           type="text"
           placeholder="password"
         />
-        <button type="submit">
+        <Button variant="warning" type="submit">
           {method === "register" ? "Register" : "Login"}
-        </button>
+        </Button>
       </form>
     </div>
   );
