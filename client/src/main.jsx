@@ -6,6 +6,7 @@ import RoutineProvider from "./components/RoutineProvider";
 import ActivitiesProvider from "./components/ActivityProvider";
 import UsersProvider from "./components/UsersProvider";
 import { BrowserRouter } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>

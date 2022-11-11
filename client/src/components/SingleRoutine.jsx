@@ -1,11 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
-import {
-  fetchSingleRoutine,
-  deleteRoutineById,
-  editRoutine,
-} from "../api/routines";
-import UpdateRoutine from "./UpdateRoutine";
+import { fetchSingleRoutine, deleteRoutineById } from "../api/routines";
 
 function SingleRoutine() {
   const navigate = useNavigate();
@@ -34,6 +29,7 @@ function SingleRoutine() {
       </button>
       <h2>Made by: {singleRoutine.creatorName}</h2>
       <h3>Goal: {singleRoutine.goal}</h3>
+      <h6>Id #{singleRoutine.id}</h6>
       <button
         onClick={async () => {
           await deleteRoutineById(singleRoutine.id);
@@ -49,6 +45,14 @@ function SingleRoutine() {
             <h4>description: {activity.description}</h4>
             <h5>Count: {activity.count}</h5>
             <h5> Duration: {activity.duration}</h5>
+            <h6>Id #{activity.id}</h6>
+            <button
+              onClick={async () => {
+                navigate(`/update/${singleRoutine.id}`);
+              }}
+            >
+              Edit the routine activity
+            </button>
           </div>
         );
       })}

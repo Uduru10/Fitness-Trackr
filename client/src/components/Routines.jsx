@@ -2,6 +2,8 @@ import { fetchRoutines } from "../api/routines";
 import { useEffect, useState } from "react";
 import useRoutines from "../hooks/useRoutines";
 import { useNavigate } from "react-router";
+import Button from "react-bootstrap/Button";
+import styles from "../styles/Routines.module.css";
 
 function Routines() {
   const { routines, setRoutines } = useRoutines([]);
@@ -42,13 +44,15 @@ function Routines() {
           <div key={routine.id}>
             <h3>Routine: {routine.name}</h3>
             <h4>Goal: {routine.goal}</h4>
-            <button
+            <Button
+              className={styles.button}
+              variant="warning"
               onClick={() => {
                 navigate(`/routines/${routine.id}`);
               }}
             >
               See Activities
-            </button>
+            </Button>
             <h6>Made by: {routine.creatorName}</h6>
           </div>
         );
