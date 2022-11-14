@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { fetchSingleRoutine, deleteRoutineById } from "../api/routines";
+import useUsers from "../hooks/useUsers";
 
 function SingleRoutine() {
+  const { users } = useUsers();
   const navigate = useNavigate();
   const [singleRoutine, setSingleRoutine] = useState({});
   const { routineId } = useParams();
@@ -20,24 +22,30 @@ function SingleRoutine() {
   return (
     <div>
       <h1>Routine: {singleRoutine.name}</h1>
-      <button
-        onClick={async () => {
-          navigate(`/edit/${singleRoutine.id}`);
-        }}
-      >
-        Edit this Routine
-      </button>
+      {users.id === singleRoutine.creator_id ? (
+        <button
+          onClick={async () => {
+            navigate(`/edit/${singleRoutine.id}`);
+          }}
+        >
+          Edit this Routine
+        </button>
+      ) : null}
+
       <h2>Made by: {singleRoutine.creatorName}</h2>
       <h3>Goal: {singleRoutine.goal}</h3>
       <h6>Id #{singleRoutine.id}</h6>
-      <button
-        onClick={async () => {
-          await deleteRoutineById(singleRoutine.id);
-          to = "/";
-        }}
-      >
-        Delete this routine
-      </button>
+      {users.id === singleRoutine.creator_id ? (
+        <button
+          onClick={async () => {
+            await deleteRoutineById(singleRoutine.id);
+            to = "/";
+          }}
+        >
+          Delete this routine
+        </button>
+      ) : null}
+
       {singleRoutine?.activities?.map((activity) => {
         return (
           <div key={activity.id}>
@@ -46,13 +54,16 @@ function SingleRoutine() {
             <h5>Count: {activity.count}</h5>
             <h5> Duration: {activity.duration}</h5>
             <h6>Id #{activity.id}</h6>
-            <button
-              onClick={async () => {
-                navigate(`/update/${singleRoutine.id}`);
-              }}
-            >
-              Edit the routine activity
-            </button>
+
+            {users.id === singleRoutine.creator_id ? (
+              <button
+                onClick={async () => {
+                  navigate(`/update/${singleRoutine.id}`);
+                }}
+              >
+                Edit the routine activity
+              </button>
+            ) : null}
           </div>
         );
       })}
