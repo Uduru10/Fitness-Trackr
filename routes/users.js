@@ -1,4 +1,5 @@
 const bcrypt = require("bcrypt");
+const e = require("express");
 const jwt = require("jsonwebtoken");
 const usersRouter = require("express").Router();
 const { User, Routine } = require("../db/adapters/index");
@@ -71,6 +72,8 @@ usersRouter.post("/login", async (req, res, next) => {
       delete user.password;
 
       res.send({ user });
+    } else {
+      next({ message: "Wrong username or password. Please try again" });
     }
   } catch (error) {
     next(error);

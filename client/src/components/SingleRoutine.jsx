@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { fetchSingleRoutine, deleteRoutineById } from "../api/routines";
+import { deleteRAById } from "../api/ra";
 import useUsers from "../hooks/useUsers";
 
 function SingleRoutine() {
@@ -62,6 +63,15 @@ function SingleRoutine() {
                 }}
               >
                 Edit the routine activity
+              </button>
+            ) : null}
+            {users.id === singleRoutine.creator_id ? (
+              <button
+                onClick={async () => {
+                  await deleteRAById(singleRoutine.id);
+                }}
+              >
+                Remove this Activity
               </button>
             ) : null}
           </div>

@@ -1,3 +1,5 @@
+import { Next } from "react-bootstrap/esm/PageItem";
+
 export async function fetchUsers() {
   const response = await fetch("/api/users");
   const result = await response.json();
@@ -20,18 +22,22 @@ export async function registerUser(username, password) {
 }
 
 export async function loginUser(username, password) {
-  const response = await fetch("/api/users/login", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      username,
-      password,
-    }),
-  });
-  const result = await response.json();
-  return result;
+  try {
+    const response = await fetch("/api/users/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username,
+        password,
+      }),
+    });
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 export async function logoutUser(username, password) {

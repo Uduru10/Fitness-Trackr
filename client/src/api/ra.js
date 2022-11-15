@@ -3,6 +3,12 @@ export async function fetchRA() {
   const result = await response.json();
   return result;
 }
+export const fetchSingleRA = async (id) => {
+  const response = await fetch(`/api/ra/${id}`);
+  const result = await response.json();
+
+  return result;
+};
 
 export async function createRA(routine_id, activity_id, duration, count) {
   const response = await fetch("/api/ra", {
@@ -35,3 +41,14 @@ export async function editRA(count, duration, id) {
   const result = await response.json();
   return result;
 }
+
+export const deleteRAById = async (id) => {
+  const response = await fetch(`/api/ra/${id}`, {
+    method: "Delete",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  const result = await response.json();
+  return result;
+};
