@@ -18,6 +18,18 @@ async function addActivityToRoutine(routine_activity) {
   }
 }
 
+async function getAllRA() {
+  try {
+    const { rows } = await client.query(
+      `SELECT * FROM routine_activities
+    `
+    );
+    return rows;
+  } catch (error) {
+    throw error;
+  }
+}
+
 async function getRoutineActivityById(id) {
   try {
     const {
@@ -116,4 +128,5 @@ module.exports = {
   updateRoutineActivity,
   destroyRoutineActivity,
   getRoutineActivitiesByRoutine,
+  getAllRA,
 };

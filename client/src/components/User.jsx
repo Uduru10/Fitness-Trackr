@@ -12,6 +12,7 @@ export default function User() {
   const navigate = useNavigate();
   const [error, setError] = useState("");
   const { setLoggedIn } = useUsers();
+  console.log("Error:", error);
   return (
     <div>
       <form
@@ -21,17 +22,19 @@ export default function User() {
           let result;
           if (method === "register") {
             result = await registerUser(username, password);
-          } else {
+          }
+
+          if (method === "login") {
             result = await loginUser(username, password);
           }
-          console.log(result);
+          console.log("Login/Register result", result);
           if (result.user) {
             setPassword("");
             setUsername("");
             setLoggedIn(true);
             navigate("/");
           } else {
-            setError(result.error);
+            setError(result.message);
           }
         }}
       >

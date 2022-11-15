@@ -45,6 +45,9 @@ function Navigation() {
           <Link className={styles.text} to="/ActivityToRoutine">
             Activity To Routine
           </Link>
+          <Link className={styles.text} to="/MyRoutines">
+            My Routines
+          </Link>
           <Link
             className={styles.text}
             onClick={() => {

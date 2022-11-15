@@ -10,6 +10,9 @@ import UpdateRA from "./components/UpdateRA";
 import Activities from "./components/Activities";
 import NewActivity from "./components/CreateActivity";
 import ActivityToRoutine from "./components/ActivityToRoutine";
+import SingleActivity from "./components/SingleActivity";
+import UpdateActivity from "./components/UpdateActivity";
+import MyRoutines from "./components/MyRoutines";
 
 function App() {
   return (
@@ -22,8 +25,14 @@ function App() {
         <Route path="/createRoutine" element={<NewRoutine />} />
         <Route path="/createActivity" element={<NewActivity />} />
         <Route path="/ActivityToRoutine" element={<ActivityToRoutine />} />
+        <Route path="/MyRoutines" element={<MyRoutines />} />
         <Route path="/routines/:routineId" element={<SingleRoutine />} />
+        <Route
+          path="/activities/:activityId/routines"
+          element={<SingleActivity />}
+        />
         <Route path="/edit/:routineId" element={<UpdateRoutine />} />
+        <Route path="/change/:activityId" element={<UpdateActivity />} />
         <Route path="/update/:routineId" element={<UpdateRA />} />
       </Routes>
     </div>

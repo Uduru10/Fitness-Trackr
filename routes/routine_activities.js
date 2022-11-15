@@ -20,6 +20,24 @@ raRouter.post("/", async (req, res, next) => {
   }
 });
 
+raRouter.get("/", async (req, res, next) => {
+  try {
+    const allRA = await RA.getAllRA();
+    res.send(allRA);
+  } catch (error) {
+    next(error);
+  }
+});
+
+raRouter.get("./:routineActivityId", async (req, res, next) => {
+  const { routineActivityId } = req.params;
+  try {
+    const singleRA = await RA.getRoutineActivityById(routineActivityId);
+    res.send(singleRA);
+  } catch (error) {
+    next(error);
+  }
+});
 raRouter.patch("/:routineActivityId", authRequired, async (req, res, next) => {
   const { routineActivityId } = req.params;
   const { count, duration } = req.body;
@@ -76,6 +94,19 @@ raRouter.delete("/:routineActivityId", authRequired, async (req, res, next) => {
     }
   } catch ({ name, message }) {
     next({ name, message });
+  }
+});
+
+raRouter.delete("/:routineActivityId", authRequired, async (req, res, next) => {
+  try {
+    const ra = await RA.getRoutineActivityById(req.params.routineActivityId);
+
+    if (ra && ra.id === req.user.id) {
+      const destroyRA = await RA.destroyRoutineActivity(ra.id);
+    }
+    res.send(destroyRA);
+  } catch (error) {
+    next(error);
   }
 });
 
