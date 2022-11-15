@@ -1,0 +1,11 @@
+.activities {
+  overflow-y: scroll;
+  max-height: 100px;
+  border: 1px solid orange;
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin-left: 25%;
+  justify-content: center;
+  align-items: center;
+}

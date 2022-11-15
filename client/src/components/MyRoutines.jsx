@@ -4,6 +4,8 @@ import useUsers from "../hooks/useUsers";
 import { useNavigate } from "react-router";
 import Button from "react-bootstrap/Button";
 import { createRA } from "../api/ra";
+import styles from "../styles/MyRoutines.module.css";
+import ActivitiesForMyRoutines from "./ActivitiesForMyRoutines";
 function MyRoutines() {
   const navigate = useNavigate();
   const [routines, setRoutines] = useState([]);
@@ -31,24 +33,22 @@ function MyRoutines() {
   return (
     <>
       <h1>My Routines</h1>
-      <h5>All Activities List</h5>
+
       {routines.map((routine) => {
         return (
           <div>
             {routine.activities.map((activity) => {
               return (
                 <div>
-                  <h6>
-                    #{activity.id} {activity.name}
-                  </h6>
                   {routine.creatorName === users.username ? (
                     <div>
                       <h4>
-                        Linked Activity #{activity.id}: {activity.name}
+                        My routine #{routine.id}: {routine.goal}
+                        <h6>
+                          Linked to Activity #{activity.id}: {activity.name}{" "}
+                        </h6>
                       </h4>
-                      <h6>
-                        Tied with my routine #{routine.id}: {routine.goal}
-                      </h6>
+
                       <Button variant="warning" onClick={displayEdit}>
                         {" "}
                         Add Another Activity
@@ -67,6 +67,9 @@ function MyRoutines() {
                             navigate("/");
                           }}
                         >
+                          <div className={styles.activities}>
+                            <ActivitiesForMyRoutines />
+                          </div>
                           <div>
                             <label></label>
                             <input
@@ -105,7 +108,6 @@ function MyRoutines() {
                               }}
                             />
                             <Button variant="warning" type="submit">
-                              {" "}
                               Submit
                             </Button>
                           </div>
