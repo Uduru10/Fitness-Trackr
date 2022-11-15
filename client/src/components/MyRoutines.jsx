@@ -44,10 +44,10 @@ function MyRoutines() {
                     <div>
                       <h4>
                         My routine #{routine.id}: {routine.goal}
-                        <h6>
-                          Linked to Activity #{activity.id}: {activity.name}{" "}
-                        </h6>
                       </h4>
+                      <h6>
+                        Linked to Activity #{activity.id}: {activity.name}{" "}
+                      </h6>
 
                       <Button variant="warning" onClick={displayEdit}>
                         {" "}
