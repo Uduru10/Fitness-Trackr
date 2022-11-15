@@ -65,15 +65,6 @@ function SingleRoutine() {
                 Edit the routine activity
               </button>
             ) : null}
-            {users.id === singleRoutine.creator_id ? (
-              <button
-                onClick={async () => {
-                  await deleteRAById(singleRoutine.id);
-                }}
-              >
-                Remove this Activity
-              </button>
-            ) : null}
           </div>
         );
       })}

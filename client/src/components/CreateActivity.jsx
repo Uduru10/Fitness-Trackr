@@ -7,6 +7,7 @@ export default function NewActivity() {
   const navigate = useNavigate();
   const [name, setName] = useState();
   const [description, setDescription] = useState();
+  const [error, setError] = useState();
 
   return (
     <div>
@@ -16,9 +17,15 @@ export default function NewActivity() {
           e.preventDefault();
           const result = await createActivity(name, description);
           console.log("Awaiting createActivity", result);
-          navigate("/activities");
+
+          if (result.name === "error") {
+            setError(result.detail);
+          } else {
+            navigate("/activities");
+          }
         }}
       >
+        {error && <h5>{error}</h5>}
         <input
           type="text"
           placeholder="name"
