@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { fetchSingleRoutine, deleteRoutineById } from "../api/routines";
-import { deleteRAById } from "../api/ra";
+
 import useUsers from "../hooks/useUsers";
 
 function SingleRoutine() {
@@ -40,7 +40,7 @@ function SingleRoutine() {
         <button
           onClick={async () => {
             await deleteRoutineById(singleRoutine.id);
-            to = "/";
+            navigate("/");
           }}
         >
           Delete this routine

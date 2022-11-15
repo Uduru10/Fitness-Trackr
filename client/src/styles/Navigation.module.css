@@ -1,5 +1,5 @@
 .background {
-  background-color: #181818;
+  background-color: #11303f;
   color: #ffd700;
   top: 0;
   position: absolute;
@@ -37,6 +37,12 @@
   bottom: 0;
   position: absolute;
   color: #fff;
-  background: #181818;
+  background: #11303f;
   width: 15%;
+  left: 13%;
+}
+
+.logo {
+  background-color: #11303f;
+  max-height: 120px;
 }

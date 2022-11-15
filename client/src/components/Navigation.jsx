@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { logoutUser } from "../api/users";
 import useUsers from "../hooks/useUsers";
 import styles from "../styles/Navigation.module.css";
-import FitnessTracker from "../assets/images/fitness tracker.png";
+import F1 from "../assets/images/Frame 1.svg";
 
 function Navigation() {
   const { loggedIn, setLoggedIn, users } = useUsers();
@@ -11,7 +11,7 @@ function Navigation() {
     <nav className={styles.background}>
       <span className={styles.title}>
         {" "}
-        <img height={40} width={200} src={FitnessTracker} />
+        <img src={F1} className={styles.logo} />
       </span>
       <span className={styles.welcome}>Welcome, {users.username}</span>
 

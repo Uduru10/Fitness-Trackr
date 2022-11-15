@@ -6,6 +6,7 @@ import Button from "react-bootstrap/Button";
 import { createRA } from "../api/ra";
 import styles from "../styles/MyRoutines.module.css";
 import ActivitiesForMyRoutines from "./ActivitiesForMyRoutines";
+
 function MyRoutines() {
   const navigate = useNavigate();
   const [routines, setRoutines] = useState([]);
@@ -29,99 +30,98 @@ function MyRoutines() {
   function displayEdit() {
     setShowEdit(true);
   }
-
+  console.log("routines:", routines);
   return (
-    <>
+    <div>
       <h1>My Routines</h1>
-
-      {routines.map((routine) => {
-        return (
-          <div>
-            {routine.activities.map((activity) => {
-              return (
+      <div>
+        {routines.map((routine) => {
+          return (
+            <>
+              {routine.creatorName === users.username ? (
                 <div>
-                  {routine.creatorName === users.username ? (
-                    <div>
-                      <h4>
-                        My routine #{routine.id}: {routine.goal}
-                      </h4>
-                      <h6>
-                        Linked to Activity #{activity.id}: {activity.name}{" "}
-                      </h6>
-
-                      <Button variant="warning" onClick={displayEdit}>
-                        {" "}
-                        Add Another Activity
-                      </Button>
-                      {showEdit === true ? (
-                        <form
-                          onSubmit={async (e) => {
-                            e.preventDefault();
-                            const result = await createRA(
-                              routine_id,
-                              activity_id,
-                              duration,
-                              count
-                            );
-                            console.log("Awaiting createRA", result);
-                            navigate("/");
+                  <h4>
+                    Routine #{routine.id}: {routine.goal}
+                  </h4>
+                  {routine.activities.map((activity) => {
+                    return (
+                      <div>
+                        <h6>
+                          Linked to Activity #{activity.id}: {activity.name}
+                        </h6>
+                      </div>
+                    );
+                  })}
+                  <Button variant="warning" onClick={displayEdit}>
+                    Add Activity
+                  </Button>
+                  {showEdit === true ? (
+                    <form
+                      onSubmit={async (e) => {
+                        e.preventDefault();
+                        const result = await createRA(
+                          routine_id,
+                          activity_id,
+                          duration,
+                          count
+                        );
+                        console.log("Awaiting createRA", result);
+                        navigate("/");
+                      }}
+                    >
+                      <div className={styles.activities}>
+                        <ActivitiesForMyRoutines />
+                      </div>
+                      <div>
+                        <label></label>
+                        <input
+                          type="text"
+                          placeholder="routine_id"
+                          value={routine_id}
+                          onChange={(e) => {
+                            setRoutine(e.target.value);
                           }}
-                        >
-                          <div className={styles.activities}>
-                            <ActivitiesForMyRoutines />
-                          </div>
-                          <div>
-                            <label></label>
-                            <input
-                              type="text"
-                              placeholder="routine_id"
-                              value={routine_id}
-                              onChange={(e) => {
-                                setRoutine(e.target.value);
-                              }}
-                            />
-                            <label></label>
-                            <input
-                              type="text"
-                              placeholder="activity_id"
-                              value={activity_id}
-                              onChange={(e) => {
-                                setActivity(e.target.value);
-                              }}
-                            />
-                            <label></label>
-                            <input
-                              type="text"
-                              placeholder="duration"
-                              value={duration}
-                              onChange={(e) => {
-                                setDuration(e.target.value);
-                              }}
-                            />
-                            <label></label>
-                            <input
-                              type="text"
-                              placeholder="count"
-                              value={count}
-                              onChange={(e) => {
-                                setCount(e.target.value);
-                              }}
-                            />
-                            <Button variant="warning" type="submit">
-                              Submit
-                            </Button>
-                          </div>
-                        </form>
-                      ) : null}
-                    </div>
+                        />
+                        <label></label>
+                        <input
+                          type="text"
+                          placeholder="activity_id"
+                          value={activity_id}
+                          onChange={(e) => {
+                            setActivity(e.target.value);
+                          }}
+                        />
+                        <label></label>
+                        <input
+                          type="text"
+                          placeholder="duration"
+                          value={duration}
+                          onChange={(e) => {
+                            setDuration(e.target.value);
+                          }}
+                        />
+                        <label></label>
+                        <input
+                          type="text"
+                          placeholder="count"
+                          value={count}
+                          onChange={(e) => {
+                            setCount(e.target.value);
+                          }}
+                        />
+                        <Button variant="warning" type="submit">
+                          Submit
+                        </Button>
+                      </div>
+                    </form>
                   ) : null}
                 </div>
-              );
-            })}
-          </div>
-        );
-      })}
-    </>
+              ) : null}
+            </>
+          );
+        })}
+      </div>
+    </div>
   );
 }
 

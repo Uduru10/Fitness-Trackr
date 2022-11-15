@@ -1,9 +1,8 @@
-import { useNavigate, useParams } from "react-router";
+import { useParams } from "react-router";
 import { useEffect, useState } from "react";
 import { fetchRoutines } from "../api/routines";
 
 function SingleActivity() {
-  const navigate = useNavigate();
   const [routines, setRoutines] = useState([]);
   const { activityId } = useParams();
   console.log("The activityId is", activityId);

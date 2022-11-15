@@ -18,6 +18,7 @@ function App() {
   return (
     <div className="App">
       <Navigation />
+
       <Routes>
         <Route path="/" element={<Routines />} />
         <Route path="/activities" element={<Activities />} />
@@ -31,6 +32,7 @@ function App() {
           path="/activities/:activityId/routines"
           element={<SingleActivity />}
         />
+
         <Route path="/edit/:routineId" element={<UpdateRoutine />} />
         <Route path="/change/:activityId" element={<UpdateActivity />} />
         <Route path="/update/:routineId" element={<UpdateRA />} />
