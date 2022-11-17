@@ -53,9 +53,9 @@ function MyRoutines() {
                       </div>
                     );
                   })}
-                  <DropdownButton variant="warning" onClick={displayEdit}>
+                  <Button variant="warning" onClick={displayEdit}>
                     Add Activity
-                  </DropdownButton>
+                  </Button>
                   {showEdit === true ? (
                     <form
                       onSubmit={async (e) => {
