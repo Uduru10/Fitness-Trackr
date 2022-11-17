@@ -1,23 +1,13 @@
 import { fetchRoutines } from "../api/routines";
 import { useEffect, useState } from "react";
 import useUsers from "../hooks/useUsers";
-import { useNavigate } from "react-router";
-import { DropdownButton } from "react-bootstrap";
-import Button from "react-bootstrap/Button";
-import { createRA } from "../api/ra";
-import styles from "../styles/MyRoutines.module.css";
-import ActivitiesForMyRoutines from "./ActivitiesForMyRoutines";
+import Dropdown from "./Dropdown";
 
 function MyRoutines() {
-  const navigate = useNavigate();
   const [routines, setRoutines] = useState([]);
   const { users } = useUsers();
-  const [routine_id, setRoutine] = useState();
-  const [activity_id, setActivity] = useState();
-  const [duration, setDuration] = useState();
-  const [count, setCount] = useState();
 
-  const [showEdit, setShowEdit] = useState(false);
+  // const [showEdit, setShowEdit] = useState(false);
 
   useEffect(() => {
     async function getRoutines() {
@@ -28,9 +18,9 @@ function MyRoutines() {
     getRoutines();
   }, []);
 
-  function displayEdit() {
-    setShowEdit(true);
-  }
+  // function displayEdit() {
+  //   setShowEdit(true);
+  // }
   console.log("routines:", routines);
   return (
     <div>
@@ -53,6 +43,8 @@ function MyRoutines() {
                       </div>
                     );
                   })}
+                  <Dropdown />
+                  {/* <h3>Before Dropdown Edition</h3>
                   <Button variant="warning" onClick={displayEdit}>
                     Add Activity
                   </Button>
@@ -115,7 +107,7 @@ function MyRoutines() {
                         </Button>
                       </div>
                     </form>
-                  ) : null}
+                  ) : null} */}
                 </div>
               ) : null}
             </>
