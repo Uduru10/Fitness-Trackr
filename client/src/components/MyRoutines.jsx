@@ -2,6 +2,7 @@ import { fetchRoutines } from "../api/routines";
 import { useEffect, useState } from "react";
 import useUsers from "../hooks/useUsers";
 import { useNavigate } from "react-router";
+import { DropdownButton } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import { createRA } from "../api/ra";
 import styles from "../styles/MyRoutines.module.css";
@@ -52,9 +53,9 @@ function MyRoutines() {
                       </div>
                     );
                   })}
-                  <Button variant="warning" onClick={displayEdit}>
+                  <DropdownButton variant="warning" onClick={displayEdit}>
                     Add Activity
-                  </Button>
+                  </DropdownButton>
                   {showEdit === true ? (
                     <form
                       onSubmit={async (e) => {
