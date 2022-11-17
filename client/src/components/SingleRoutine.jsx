@@ -19,7 +19,7 @@ function SingleRoutine() {
 
     getRoutineById();
   }, []);
-
+  console.log("singleRoutine", singleRoutine);
   return (
     <div>
       <h1>Routine: {singleRoutine.name}</h1>
