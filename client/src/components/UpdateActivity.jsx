@@ -6,6 +6,7 @@ export default function UpdateActivity() {
   const { activityId } = useParams();
   const navigate = useNavigate();
 
+  const [name, setName] = useState("");
   const [description, setDescription] = useState("");
 
   return (
@@ -15,11 +16,19 @@ export default function UpdateActivity() {
         onSubmit={async (e) => {
           e.preventDefault();
 
-          const result = await editActivity(description, +activityId);
+          const result = await editActivity(name, description, +activityId);
           console.log("Awaiting editActivity", result);
-          navigate("/");
+          navigate("/activities");
         }}
       >
+        <input
+          type="text"
+          placeholder="name"
+          value={name}
+          onChange={(e) => {
+            setName(e.target.value);
+          }}
+        ></input>
         <input
           type="text"
           placeholder="description"

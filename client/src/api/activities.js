@@ -25,7 +25,7 @@ export async function RoutinesByActivityId(id) {
   return result;
 }
 
-export async function editActivity(name, description) {
+export async function editActivity(name, description, id) {
   const response = await fetch(`/api/activities/${id}`, {
     method: "PATCH",
     headers: {
