@@ -35,7 +35,7 @@ function App() {
 
         <Route path="/edit/:routineId" element={<UpdateRoutine />} />
         <Route path="/change/:activityId" element={<UpdateActivity />} />
-        <Route path="/update/:routineId" element={<UpdateRA />} />
+        <Route path="/update/:routineId/:activityId" element={<UpdateRA />} />
       </Routes>
     </div>
   );

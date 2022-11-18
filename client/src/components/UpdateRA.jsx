@@ -2,8 +2,9 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
 import { editRA } from "../api/ra";
 
-export default function UpdateRoutine() {
+export default function UpdateRA() {
   const { routineId } = useParams();
+  const { activityId } = useParams();
   const navigate = useNavigate();
   const [count, setCount] = useState("");
   const [duration, setDuration] = useState("");
@@ -14,8 +15,8 @@ export default function UpdateRoutine() {
       <form
         onSubmit={async (e) => {
           e.preventDefault();
-          console.log({ count, duration, routineId });
-          const result = await editRA(count, duration, +routineId);
+          console.log({ routineId, activityId, duration, count });
+          const result = await editRA(+routineId, +activityId, duration, count);
           console.log("Awaiting editRoutine", result);
           navigate("/");
         }}

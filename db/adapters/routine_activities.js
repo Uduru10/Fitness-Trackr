@@ -48,25 +48,42 @@ async function getRoutineActivityById(id) {
   }
 }
 
-async function updateRoutineActivity(id, fields = {}) {
-  const setString = Object.keys(fields)
-    .map((key, index) => `"${key}"= $${index + 1}`)
-    .join(",");
-  if (setString.length === 0) {
-    return;
-  }
+// async function updateRoutineActivity(id, fields = {}) {
+//   const setString = Object.keys(fields)
+//     .map((key, index) => `"${key}"= $${index + 1}`)
+//     .join(",");
+//   if (setString.length === 0) {
+//     return;
+//   }
+//   try {
+//     const {
+//       rows: [routine_activity],
+//     } = await client.query(
+//       `UPDATE routine_activities
+//   SET ${setString}
+//   WHERE id=${id}
+//   RETURNING *;
+//   `,
+//       Object.values(fields)
+//     );
+//     return routine_activity;
+//   } catch (error) {
+//     throw error;
+//   }
+// }
+
+async function updateRoutineActivity(routine_id, activity_id, count, duration) {
   try {
     const {
-      rows: [routine_activity],
+      rows: [updatedRA],
     } = await client.query(
       `UPDATE routine_activities
-  SET ${setString}
-  WHERE id=${id}
-  RETURNING *;
-  `,
-      Object.values(fields)
+      SET count = $3, duration = $4
+      WHERE routine_activities.routine_id = $1 AND routine_activities.activity_id = $2
+      RETURNING count, duration`,
+      [routine_id, activity_id, count, duration]
     );
-    return routine_activity;
+    return updatedRA;
   } catch (error) {
     throw error;
   }

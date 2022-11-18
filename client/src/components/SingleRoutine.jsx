@@ -65,7 +65,7 @@ function SingleRoutine() {
                 className={styles.editRA}
                 variant="warning"
                 onClick={async () => {
-                  navigate(`/update/${singleRoutine.id}`);
+                  navigate(`/update/${routineId}/${activity.id}`);
                 }}
               >
                 Edit the routine activity

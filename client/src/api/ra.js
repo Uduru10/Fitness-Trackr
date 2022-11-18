@@ -27,15 +27,17 @@ export async function createRA(routine_id, activity_id, duration, count) {
   return result;
 }
 
-export async function editRA(count, duration, id) {
-  const response = await fetch(`/api/ra/${id}`, {
+export async function editRA(routine_id, activity_id, duration, count) {
+  const response = await fetch(`/api/ra/${routine_id}/${activity_id}`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      count,
+      routine_id,
+      activity_id,
       duration,
+      count,
     }),
   });
   const result = await response.json();
