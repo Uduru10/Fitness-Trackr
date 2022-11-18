@@ -22,7 +22,7 @@ function Activities() {
       {activities.map((activity) => {
         return (
           <div key={activity.id}>
-            <h3> Activity: {activity.name} </h3>
+            <h2> {activity.name} </h2>
             <h4> Description: {activity.description}</h4>
             <Button
               className={styles.button}

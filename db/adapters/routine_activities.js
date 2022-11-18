@@ -1,4 +1,5 @@
 const client = require("../client");
+
 async function addActivityToRoutine(routine_activity) {
   const { routine_id, activity_id, duration, count } = routine_activity;
   try {
@@ -71,16 +72,33 @@ async function updateRoutineActivity(id, fields = {}) {
   }
 }
 
-async function destroyRoutineActivity(id) {
+// async function destroyRoutineActivity(id) {
+//   try {
+//     const { rows } = await client.query(
+//       `
+//       DELETE FROM routine_activities
+//       WHERE id= ${id}
+//       RETURNING *;
+//       `
+//     );
+//     return rows;
+//   } catch (error) {
+//     throw error;
+//   }
+// }
+
+async function destroyRoutineActivity(routine_id, activity_id) {
   try {
-    const { rows } = await client.query(
-      `
-      DELETE FROM routine_activities
-      WHERE id= ${id}
-      RETURNING *;
-      `
+    const {
+      rows: { deletedRA },
+    } = await client.query(
+      ` DELETE FROM routine_activities
+         WHERE routine_activities.routine_id=$1 AND routine_activities.activity_id = $2
+         RETURNING *;
+           `,
+      [routine_id, activity_id]
     );
-    return rows;
+    return deletedRA;
   } catch (error) {
     throw error;
   }

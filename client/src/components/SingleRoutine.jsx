@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { fetchSingleRoutine, deleteRoutineById } from "../api/routines";
-
+import { deleteRA } from "../api/ra";
 import useUsers from "../hooks/useUsers";
+import Button from "react-bootstrap/Button";
+import styles from "../styles/SingleRoutine.module.css";
 
 function SingleRoutine() {
   const { users } = useUsers();
@@ -24,27 +26,29 @@ function SingleRoutine() {
     <div>
       <h1>Routine: {singleRoutine.name}</h1>
       {users.id === singleRoutine.creator_id ? (
-        <button
+        <Button
+          variant="warning"
           onClick={async () => {
             navigate(`/edit/${singleRoutine.id}`);
           }}
         >
           Edit this Routine
-        </button>
+        </Button>
       ) : null}
 
       <h2>Made by: {singleRoutine.creatorName}</h2>
       <h3>Goal: {singleRoutine.goal}</h3>
       <h6>Id #{singleRoutine.id}</h6>
       {users.id === singleRoutine.creator_id ? (
-        <button
+        <Button
+          variant="warning"
           onClick={async () => {
             await deleteRoutineById(singleRoutine.id);
             navigate("/");
           }}
         >
           Delete this routine
-        </button>
+        </Button>
       ) : null}
 
       {singleRoutine?.activities?.map((activity) => {
@@ -57,13 +61,26 @@ function SingleRoutine() {
             <h6>Id #{activity.id}</h6>
 
             {users.id === singleRoutine.creator_id ? (
-              <button
+              <Button
+                className={styles.editRA}
+                variant="warning"
                 onClick={async () => {
                   navigate(`/update/${singleRoutine.id}`);
                 }}
               >
                 Edit the routine activity
-              </button>
+              </Button>
+            ) : null}
+            {users.id === singleRoutine.creator_id ? (
+              <Button
+                variant="warning"
+                onClick={async () => {
+                  deleteRA(singleRoutine.id, activity.id);
+                  navigate(`/MyRoutines`);
+                }}
+              >
+                Delete this Activity
+              </Button>
             ) : null}
           </div>
         );

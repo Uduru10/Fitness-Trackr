@@ -18,6 +18,7 @@ function SingleActivity() {
 
   return (
     <>
+      <h1> Activity #{activityId}</h1>
       {routines.map((routine) => {
         return (
           <div>
@@ -26,7 +27,6 @@ function SingleActivity() {
                 <div>
                   {activity.id === +activityId ? (
                     <div>
-                      Activity: {activity.name}
                       <h2>
                         Routine #{routine.id}: {routine.name}
                       </h2>
