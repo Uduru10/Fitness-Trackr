@@ -42,8 +42,18 @@ export async function editRA(count, duration, id) {
   return result;
 }
 
-export const deleteRAById = async (id) => {
-  const response = await fetch(`/api/ra/${id}`, {
+// export const deleteRAById = async (id) => {
+//   const response = await fetch(`/api/ra/${id}`, {
+//     method: "Delete",
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//   });
+//   const result = await response.json();
+//   return result;
+// };
+export async function deleteRA(routine_id, activity_id) {
+  const response = await fetch(`/api/ra/${routine_id}/${activity_id}`, {
     method: "Delete",
     headers: {
       "Content-Type": "application/json",
@@ -51,4 +61,4 @@ export const deleteRAById = async (id) => {
   });
   const result = await response.json();
   return result;
-};
+}
